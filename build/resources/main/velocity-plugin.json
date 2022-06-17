@@ -1,0 +1,7 @@
+{
+  "id": "timevelocityapi",
+  "name": "TimeVelocityAPI",
+  "version": "1.0-SNAPSHOT",
+  "author": "ByRaudy",
+  "main": "net.timenation.timevelocityapi.TimeVelocityAPI"
+}
