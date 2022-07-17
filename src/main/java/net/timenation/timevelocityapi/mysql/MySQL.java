@@ -26,8 +26,8 @@ public class MySQL {
     public MySQL(String database) {
         this.host = "127.0.0.1";
         this.port = 3306;
-        this.user = "user";
-        this.password = "w5vffZjUzJnlTXaWIGKcCeblkmjaKU";
+        this.user = TimeVelocityAPI.getInstance().getTimeConfig().getSqlCredentials().getUser();
+        this.password = TimeVelocityAPI.getInstance().getTimeConfig().getSqlCredentials().getPassword();
         this.database = database;
         this.executorService = Executors.newCachedThreadPool();
 

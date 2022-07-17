@@ -3,6 +3,7 @@ package net.timenation.timevelocityapi.utils;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import net.timenation.timevelocityapi.TimeVelocityAPI;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -16,7 +17,7 @@ public class RabbitMQ {
     public RabbitMQ() {
         this.connectionFactory = new ConnectionFactory();
         this.connectionFactory.setUsername("admin");
-        this.connectionFactory.setPassword("9cL9RttK6Sn5t9Wb4iqgM68jN3Q3KK");
+        this.connectionFactory.setPassword(TimeVelocityAPI.getInstance().getTimeConfig().getRabbitMQCredentials().getPassword());
 
         try {
             this.connection = this.connectionFactory.newConnection();

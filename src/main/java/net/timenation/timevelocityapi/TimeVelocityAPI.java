@@ -5,10 +5,12 @@ import com.velocitypowered.api.event.EventManager;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.event.proxy.ProxyShutdownEvent;
+import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
 import eu.thesimplecloud.api.CloudAPI;
 import lombok.Getter;
+import net.timenation.timevelocityapi.config.TimeConfig;
 import net.timenation.timevelocityapi.data.Logger;
 import net.timenation.timevelocityapi.data.UUIDFetcher;
 import net.timenation.timevelocityapi.manager.backend.RequestManager;
@@ -21,7 +23,9 @@ import net.timenation.timevelocityapi.manager.player.TimePlayerManager;
 import net.timenation.timevelocityapi.mysql.MySQL;
 import net.timenation.timevelocityapi.utils.RabbitMQ;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 
 @Getter
 public class TimeVelocityAPI {
@@ -30,20 +34,26 @@ public class TimeVelocityAPI {
     private final ProxyServer proxyServer;
     private final Logger logger;
     private final MySQL mySQL;
+
+    private final TimeConfig timeConfig;
     private final TimePlayerManager timePlayerManager;
     private final RequestManager requestManager;
     private final CloudManager cloudManager;
     private final RankManager rankManager;
     private final NotificationManager notificationManager;
     private final UUIDFetcher uuidFetcher;
+
+    private final Path dataPath;
     private final RabbitMQ rabbitMQ;
 
     @Inject
-    public TimeVelocityAPI(ProxyServer proxyServer) {
+    public TimeVelocityAPI(ProxyServer proxyServer, @DataDirectory Path dataPath) {
         instance = this;
         this.proxyServer = proxyServer;
+        this.dataPath = dataPath;
+        this.timeConfig = TimeConfig.loadConfig(new File(dataPath.toFile() + "/config.json"));
         this.logger = new Logger();
-        this.mySQL = new MySQL("Storage");
+        this.mySQL = new MySQL("timenation");
         this.timePlayerManager = new TimePlayerManager();
         this.requestManager = new RequestManager();
         this.cloudManager = new CloudManager();
