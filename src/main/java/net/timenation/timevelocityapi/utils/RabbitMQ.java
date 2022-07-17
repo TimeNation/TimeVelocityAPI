@@ -16,7 +16,7 @@ public class RabbitMQ {
 
     public RabbitMQ() {
         this.connectionFactory = new ConnectionFactory();
-        this.connectionFactory.setUsername("admin");
+        this.connectionFactory.setUsername(TimeVelocityAPI.getInstance().getTimeConfig().getRabbitMQCredentials().getUser());
         this.connectionFactory.setPassword(TimeVelocityAPI.getInstance().getTimeConfig().getRabbitMQCredentials().getPassword());
 
         try {

@@ -1,0 +1,13 @@
+{
+  "sqlCredentials": {
+    "user": "admin",
+    "password": "test",
+    "database": "timenation",
+    "host": "127.0.0.1"
+  },
+  "rabbitMQCredentials": {
+    "user": "admin",
+    "password": "test",
+    "host": "127.0.0.1"
+  }
+}
